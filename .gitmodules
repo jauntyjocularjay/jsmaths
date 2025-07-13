@@ -1,0 +1,3 @@
+[submodule "src/module/jestr"]
+	path = src/module/jestr
+	url = https://github.com/jauntyjocularjay/Jestr.git
