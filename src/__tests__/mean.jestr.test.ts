@@ -32,7 +32,7 @@ describe('mean() Jestr tests', () => {
                             expects.toBe.closeToNumber(`the mean of [${meanSet}]`, subject, target);
                         }
                     } catch(error) {
-                        expects.toThrow(`Find the mean of an empty array, mean([${meanSet}])`, () => {
+                        expects.toThrow(`Passing an empty array into the function: mean([${meanSet}])`, () => {
                             mean(meanSet);
                         });
                     }

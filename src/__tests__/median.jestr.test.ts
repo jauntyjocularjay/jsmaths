@@ -46,7 +46,7 @@ describe('median() Jestr tests', () => {
                 });
             }
             catch(error) {
-                expects.toThrow(`passing an empty array into the function: median([${medianSet}])`, () => median(medianSet))
+                expects.toThrow(`Passing an empty array into the function: median([${medianSet}])`, () => median(medianSet))
             }
         });
     });

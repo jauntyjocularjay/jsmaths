@@ -17,9 +17,8 @@ describe('range() Jestr tests', () => {
     ];
 
     rangeArray.forEach(rangeSet => {
-        describe(`given the set [${rangeSet}], range(number[]) will find the range`, () => {
-            try {
-                let subject = range(rangeSet);
+        describe(`passing the set into range([${rangeSet}])`, () => {
+                let subject: number[];
                 let target: number[];
 
 
@@ -35,13 +34,14 @@ describe('range() Jestr tests', () => {
                     target = rangeSet;
                 }
 
-                subject.forEach((subjectValue) => {
-                    expects.array.toContain(`the value: ${subjectValue}`, subjectValue, `target array [${target}]`, target);
-                })
-
-            } catch (error) {
-                expects.toThrow(`empty array`, () => range(rangeSet));
-            }
+                try{
+                    subject = range(rangeSet);
+                    subject.forEach((subjectValue) => {
+                        expects.array.toContain(`the value: ${subjectValue}`, subjectValue, `target array [${target}]`, target);
+                    });
+                } catch (error) {
+                    expects.toThrow(`Passing an empty array into the function: range([${rangeSet}])`, () => range(rangeSet));
+                }
         })
     });
 });
