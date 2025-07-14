@@ -18,13 +18,14 @@ describe('median() Jestr tests', () => {
         [3, 1],
         [3],
         [500,100,95,781,354,8791,36],
-        [15,1000015, 58144352216, 2]
+        [15,1000015, 58144352216, 2],
+        []
     ];
 
     medianArray.forEach(medianSet => {
         describe(`Given the array [${medianSet}], find the median`, () => {
             const isEven = medianSet.length % 2 == 0;
-            const subject = median(medianSet);
+            let subject: number[];
             let target: number[];
 
             medianSet = medianSet.sort((a, b) => a - b);
@@ -38,9 +39,15 @@ describe('median() Jestr tests', () => {
                 target = [medianSet[Math.floor(medianSet.length / 2)]];
             }
 
-            subject.forEach(subjectValue => {
-                expects.array.toContain(`the jsmaths result: ${subjectValue}`, subjectValue, `containing the median: [${target}]`, target);
-            });
+            try {
+                subject = median(medianSet);
+                subject.forEach(subjectValue => {
+                    expects.array.toContain(`the jsmaths result: ${subjectValue}`, subjectValue, `containing the median: [${target}]`, target);
+                });
+            }
+            catch(error) {
+                expects.toThrow(`passing an empty array into the function: median([${medianSet}])`, () => median(medianSet))
+            }
         });
     });
 });

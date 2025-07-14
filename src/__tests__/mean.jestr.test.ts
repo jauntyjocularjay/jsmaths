@@ -8,28 +8,36 @@ describe('mean() Jestr tests', () => {
         [3, 6, 7, 8, 8, 10, 13, 15, 16, 20],
         [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20],
         [3],
+        []
     ];
 
     meanArray.forEach(meanSet => {
-        describe(`Given the set [${meanSet}], find the mean`, () => {
-            let total = 0.0;
-            let target = 0.0;
-            let subject = 0.0;
+        describe(`The mean from this set [${meanSet}]`, () => {
+                    let total = 0.0;
+                    let target = 0.0;
+                    let subject: number;
 
-            meanSet.forEach(num => {
-                total += num;
-            });
+                    meanSet.forEach(num => {
+                        total += num;
+                    });
 
-            subject = mean(meanSet);
-            target = total / meanSet.length;
+                    target = total / meanSet.length;
 
-            if (Number.isInteger(subject) && Number.isInteger(target)) {
-                expects.toBe.number(`the mean of [${meanSet}]`, subject, target);
-            } else {
-                expects.toBe.closeToNumber(`the mean of [${meanSet}]`, subject, target);
-            }
+                    try{
+                        subject = mean(meanSet);
+                        if (Number.isInteger(subject) && Number.isInteger(target)) {
+                        expects.toBe.number(`the mean of [${meanSet}]`, subject, target);
+                        }
+                        else {
+                            expects.toBe.closeToNumber(`the mean of [${meanSet}]`, subject, target);
+                        }
+                    } catch(error) {
+                        expects.toThrow(`Find the mean of an empty array, mean([${meanSet}])`, () => {
+                            mean(meanSet);
+                        });
+                    }
 
-            i++;
+                    i++;
         });
     });
 });

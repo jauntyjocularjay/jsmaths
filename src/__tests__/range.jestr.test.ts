@@ -17,7 +17,7 @@ describe('range() Jestr tests', () => {
     ];
 
     rangeArray.forEach(rangeSet => {
-        describe(`given the set ${rangeSet}, range(number[]) will find the range`, () => {
+        describe(`given the set [${rangeSet}], range(number[]) will find the range`, () => {
             try {
                 let subject = range(rangeSet);
                 let target: number[];
