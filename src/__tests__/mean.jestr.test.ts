@@ -8,6 +8,7 @@ describe('mean() Jestr tests', () => {
         [3, 6, 7, 8, 8, 10, 13, 15, 16, 20],
         [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20],
         [3],
+        // [8,9,2,NaN,3], // the NaN edge case
         []
     ];
 
@@ -25,18 +26,21 @@ describe('mean() Jestr tests', () => {
 
                     try{
                         subject = mean(meanSet);
+
                         if (Number.isInteger(subject) && Number.isInteger(target)) {
-                        expects.toBe.number(`the mean of [${meanSet}]`, subject, target);
+                            expects.toBe.number(`the mean of [${meanSet}]`, subject, target);
                         }
                         else {
                             expects.toBe.closeToNumber(`the mean of [${meanSet}]`, subject, target);
                         }
+
                     } catch(error) {
+
                         expects.toThrow(`Passing an empty array into the function: mean([${meanSet}])`, () => {
                             mean(meanSet);
                         });
-                    }
 
+                    }
                     i++;
         });
     });

@@ -1,5 +1,6 @@
 import { expects } from '../module/jestr/Jestr';
 import { range } from '../functions/range';
+import { edge_cases } from '../module/jestr/Constants'
 
 describe('range() Jestr tests', () => {
     /*
@@ -11,6 +12,7 @@ describe('range() Jestr tests', () => {
     const rangeArray = [
         [35, 20, 15, 50, 40],
         [3, 6, 7, 8, 8, 10, 13, 15, 16, 20],
+        // [3, 3, NaN].concat(edge_cases.numbers), // edge cases appended
         [5, 4],
         [3],
         []
@@ -20,7 +22,6 @@ describe('range() Jestr tests', () => {
         describe(`passing the set into range([${rangeSet}])`, () => {
                 let subject: number[];
                 let target: number[];
-
 
                 rangeSet = rangeSet.sort((a,b) => a-b);
 
@@ -37,7 +38,7 @@ describe('range() Jestr tests', () => {
                 try{
                     subject = range(rangeSet);
                     subject.forEach((subjectValue) => {
-                        expects.array.toContain(`the value: ${subjectValue}`, subjectValue, `target array [${target}]`, target);
+                        expects.array.toContain(`the value: ${subjectValue}`, subjectValue, `target array [${target}]`, target, true);
                     });
                 } catch (error) {
                     expects.toThrow(`Passing an empty array into the function: range([${rangeSet}])`, () => range(rangeSet));
